@@ -1,0 +1,35 @@
+.header {
+  height: 80px;
+  width: 100%;
+  padding: 16px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FFFFFF;
+
+  &__home-link {
+    font-size: 18px;
+    line-height: 28px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    text-decoration: none;
+    color: #000000D9;
+  }
+
+  &__right-side {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .sign-button {
+    height: 51px;
+    border-radius: 5px;
+    padding: 6px 18px;
+  }
+
+  .sign-button--sign-up {
+    color: rgba(82, 196, 26, 1);
+    border: 1px solid rgba(82, 196, 26, 1);
+  }
+}
