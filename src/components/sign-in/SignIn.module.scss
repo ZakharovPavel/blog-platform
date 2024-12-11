@@ -1,0 +1,263 @@
+.sign-form {
+  min-height: 374px;
+  width: 384px;
+  padding: 48px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+  overflow: hidden;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  box-shadow: 0 0.61px 2.93px 0 rgba(0, 0, 0, 0.02);
+  box-shadow: 0 1.46px 7.05px 0 rgba(0, 0, 0, 0.03);
+  box-shadow: 0 2.75px 13.27px 0 rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4.91px 23.68px 0 rgba(0, 0, 0, 0.04);
+  box-shadow: 0 9.19px 44.28px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 22px 106px 0 rgba(0, 0, 0, 0.07);
+
+  & > :last-child {
+    margin-top: -13px;
+  }
+
+  &__title {
+    //styleName: Semibold / 20 px | 28 px;
+    // font-family: Roboto;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 28px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #262626;
+  }
+
+  .sign-form__label-text {
+    //styleName: Regular / 14px | 22px;
+    // font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400px;
+    line-height: 22px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #262626;
+  }
+
+  input:focus {
+    border: 2px solid #D9D9D9;
+  }
+
+  .sign-form__label-input {
+    height: 40px;
+    width: 320px;
+    padding: 8px 12px;
+    border: 1px solid #D9D9D9;
+    border-radius: 4px;
+  }
+
+  // .sign-form__label-input--error {
+  //   height: 40px;
+  //   width: 320px;
+  //   padding: 8px 12px;
+  //   border: 1px solid #F5222D;
+  //   border-radius: 4px;
+  // }
+
+  // .sign-form__label-input--error:focus {
+  //   height: 40px;
+  //   width: 320px;
+  //   padding: 8px 12px;
+  //   border: 2px solid #f7b5b5;
+  //   border-radius: 4px;
+  // }
+
+  .sign-form__label-input--error {
+    height: 40px;
+    width: 320px;
+    padding: 8px 12px;
+    border: 1px solid #f7b5b5;
+    border-radius: 4px;
+  }
+
+  .sign-form__label-input--error:focus {
+    height: 40px;
+    width: 320px;
+    padding: 8px 12px;
+    border: 1px solid #F5222D;
+    border-radius: 4px;
+  }
+
+  input::placeholder {
+    //styleName: Regular / 16 px | 24 px;
+    // font-family: Roboto;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #BFBFBF;
+  }
+
+  // .sign-form__label-input:focus {
+  //   border: 3px solid red;
+  // }
+
+  .form-agreement {
+    height: 52px;
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+    padding-top: 10px;
+    align-self: flex-start;
+    border-top: 1px solid #E8E8E8;
+  }
+  
+  .form-agreement__text {
+    display: flex;
+    align-self: center;
+    //styleName: Regular / 14px | 22px;
+    // font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #595959;
+  }
+
+  .sign-form__button {
+    width: 100%;
+    min-height: 40px;
+    height: 40px;
+    margin-top: 11px;
+    //styleName: Regular / 16 px | 24 px;
+    // font-family: Roboto;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #ffffff;
+    background-color: #1890FF;
+    border-radius: 5px;
+    border-style: none;
+    cursor: pointer;
+  }
+
+  .sign-form__transfer-text {
+    //styleName: Regular / 12px | 20 px;
+    // font-family: Roboto;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #8C8C8C;
+  }
+
+  .sign-form__transfer-link {
+    // font-family: Roboto;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #1890FF;
+  }
+
+  .sign-form__transfer-link:hover {
+    text-decoration: underline;
+  }
+
+  .sign-form__validation-error-container {
+    // height: 22px;
+  }
+
+  .sign-form__validation-error-text {
+    //styleName: Regular / 14px | 22px;
+    // font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #F5222D;
+  }
+
+}
+
+// customize checkbox
+
+/* для элемента input c type="checkbox" */
+.form-agreement>input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+/* для элемента label, связанного с .custom-checkbox */
+.form-agreement>span {
+  // display: inline-flex;
+  // align-items: center;
+  user-select: none;
+}
+
+/* создание в label псевдоэлемента before со следующими стилями */
+.form-agreement>span::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 1px solid #adb5bd;
+  border-radius: 3px;
+  margin-top: 2px;
+  margin-right: 8px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+}
+
+/* стили при наведении курсора на checkbox */
+.form-agreement>input:not(:disabled):not(:checked)+span:hover::before {
+  border-color: #b3d7ff;
+}
+
+/* стили для активного чекбокса (при нажатии на него) */
+.form-agreement>input:not(:disabled):active+span::before {
+  background-color: #b3d7ff;
+  border-color: #b3d7ff;
+}
+
+/* стили для чекбокса, находящегося в фокусе */
+.form-agreement>input:focus+span::before {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* стили для чекбокса, находящегося в фокусе и не находящегося в состоянии checked */
+.form-agreement>input:focus:not(:checked)+span::before {
+  border-color: #80bdff;
+}
+
+/* стили для чекбокса, находящегося в состоянии checked */
+.form-agreement>input:checked+span::before {
+  border-color: #1890FF;
+  background-color: #1890FF;
+  background-image: url("data:image/svg+xml,%3Csvg width='11' height='9' viewBox='0 0 11 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.91308 4.03516H1.91326C1.99256 4.03525 2.07081 4.05331 2.14213 4.08798C2.21341 4.12262 2.27591 4.17295 2.32497 4.2352L1.91308 4.03516ZM1.91308 4.03516H1.09394C0.890308 4.03516 0.776602 4.26975 0.902321 4.4292L0.902371 4.42927L4.11214 8.49567L4.11218 8.49573C4.32247 8.76188 4.72568 8.76114 4.93667 8.49617L4.93708 8.49566L10.6597 1.24398C10.6598 1.24378 10.66 1.24358 10.6602 1.24338C10.7884 1.08295 10.6699 0.85 10.4689 0.85H9.6498C9.48941 0.85 9.33668 0.9235 9.2376 1.05044C9.23751 1.05055 9.23742 1.05066 9.23734 1.05077L4.52403 7.02157M1.91308 4.03516L4.52403 7.02157M4.52403 7.02157L2.32506 4.23531L4.52403 7.02157Z' fill='white' stroke='white' stroke-width='0.3'/%3E%3C/svg%3E");
+}
+
+/* стили для чекбокса, находящегося в состоянии disabled */
+.form-agreement>input:disabled+span::before {
+  background-color: #e9ecef;
+}
+
+// .form > :last-child {
+//   margin-top: -13px;
+// }

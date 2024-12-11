@@ -19,9 +19,10 @@
 
   &__right-side {
     display: flex;
+    align-items: center;
     gap: 10px;
   }
-  
+
   .sign-button {
     height: 51px;
     border-radius: 5px;
@@ -31,5 +32,34 @@
   .sign-button--sign-up {
     color: rgba(82, 196, 26, 1);
     border: 1px solid rgba(82, 196, 26, 1);
+  }
+
+  &__profile-preview-button {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+  }
+
+  .sign-button--log-out {
+    border-radius: 5px;
+    border: 1px 0px 0px 0px;
+    border: 1px solid #000000BF;
+    opacity: 0px;
+  }
+
+  .sign-button--create-article {
+    height: 31px;
+    padding: 6px 10px;
+    //styleName: @font-size-base: 14px;
+    // font-family: Inter UI;
+    font-size: 14px;
+    line-height: 22px;
+    // text-align: center;
+    display: flex;
+    align-items: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #52C41A;
+    border: 1px solid #52C41A;
   }
 }

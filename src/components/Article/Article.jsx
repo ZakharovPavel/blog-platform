@@ -1,9 +1,9 @@
 import styles from './Article.module.scss';
-import { Avatar, Tag, Typography } from 'antd';
+import { Avatar, Spin, Tag, Typography } from 'antd';
 import { format } from 'date-fns';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchArticle } from '../../utils/PlatformService';
+import { fetchArticle } from '../../utils/ArticleService';
 import Markdown from 'markdown-to-jsx';
 import { useEffect } from 'react';
 
@@ -12,15 +12,19 @@ const Article = () => {
 
   const dispatch = useDispatch();
   const { slugValue } = useParams();
-  const isLoggedIn = useSelector((state) => state.article.isLoggedIn);
-  const article = useSelector((state) => state.article.currentArticle);
+  const { isLoggedIn } = useSelector((state) => state.account);
+  const { article, status } = useSelector((state) => state.article);
 
   useEffect(() => {
     dispatch(fetchArticle(slugValue));
-  }, [])
+  }, [dispatch]);
 
-  if (!article) {
-    return <h1>Article is not found</h1>;
+  // if (!article) {
+  //   return <Spin size="large" />;
+  // }
+
+  if (!article || status === 'loading') {
+    return <Spin size="large" />;
   }
 
   return (
@@ -28,9 +32,7 @@ const Article = () => {
       <div className={styles['article-header']}>
         <div className={styles['article-header__left-side']}>
           <div className={styles['article-header__title-container']}>
-            <span className={styles['article-header__title']}>
-              {article.title}
-            </span>
+            <span className={styles['article-header__title']}>{article.title}</span>
             <div className={styles['like-container']}>
               <input
                 className={styles['custom-checkbox']}
@@ -47,9 +49,7 @@ const Article = () => {
             </div>
           </div>
           <div className={styles['article-header__tags-container']}>
-            {article.tagList && article.tagList.map((tag, index) => (
-              <Tag key={`${article.slug}_${index}`}>{tag}</Tag>
-            ))}
+            {article.tagList && article.tagList.map((tag, index) => <Tag key={`${article.slug}_${index}`}>{tag}</Tag>)}
           </div>
         </div>
         <div className={styles['article-header__right-side']}>

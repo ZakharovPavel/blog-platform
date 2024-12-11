@@ -2,30 +2,40 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 const apiBase = 'https://blog-platform.kata.academy/api';
 
-const fetchArticles = createAsyncThunk('article/fetchArticles', async (page) => {
-    try {
+const fetchArticlesForThunk = async (page, { rejectWithValue }) => {
+  try {
     const response = await fetch(`${apiBase}/articles?limit=5&offset=${page * 5 - 5}&page=${page}`);
     if (!response.ok) {
-      throw new Error('Нет запроса');
+      throw new Error('Can\'t fetch articles');
     }
     const result = await response.json();
     return result;
   } catch (error) {
-    console.error(error);
+    // console.error(error);
+    return rejectWithValue(error.message);
   }
+};
+
+const fetchArticles = createAsyncThunk('article/fetchArticles', async (page, { rejectWithValue }) => {
+  return fetchArticlesForThunk(page, { rejectWithValue });
 });
 
-const fetchArticle = createAsyncThunk('article/fetchArticle', async (slug) => {
+const fetchArticleForThunk = async (slug, { rejectWithValue }) => {
   try {
-  const response = await fetch(`${apiBase}/articles/${slug}`);
-  if (!response.ok) {
-    throw new Error('Нет запроса');
+    const response = await fetch(`${apiBase}/articles/${slug}`);
+    if (!response.ok) {
+      throw new Error('Can\'t fetch article');
+    }
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    // console.error(error);
+    return rejectWithValue(error.message);
   }
-  const result = await response.json();
-  return result;
-} catch (error) {
-  console.error(error);
-}
+};
+
+const fetchArticle = createAsyncThunk('article/fetchArticle', async (slug, { rejectWithValue }) => {
+  return fetchArticleForThunk(slug, { rejectWithValue });
 });
 
 const transformArticle = (article, id) => {

@@ -1,6 +1,8 @@
 @import '../node_modules/normalize.css';
 
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -32,3 +34,23 @@ a {
   color: black; /* blue colors for links too */
   text-decoration: inherit; /* no underline */
 }
+
+input {
+  // all: unset;
+  // box-sizing: border-box;
+  // cursor: text;
+}
+
+input[type=text],
+input[type=email],
+input[type=password] {
+  all: unset;
+  box-sizing: border-box;
+  cursor: text;
+}
+
+// input[type=text],
+// input[type=email],
+// input[type=password] {
+//   cursor: text;
+// }

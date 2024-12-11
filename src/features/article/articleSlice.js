@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchArticle, fetchArticles } from '../../utils/PlatformService';
+import { fetchArticle, fetchArticles } from '../../utils/ArticleService';
 
 export const articleSlice = createSlice({
   name: 'article',
   initialState: {
     value: 0,
     articles: [],
-    currentArticle: null,
+    article: null,
     articlesCount: 0,
     currentPage: 1,
     fetchOffset: 0,
@@ -14,7 +14,6 @@ export const articleSlice = createSlice({
     status: null,
     error: null,
     errorMessage: '',
-    isLoggedIn: false,
   },
   reducers: {
     setCurrentPage: (state, action) => {
@@ -39,7 +38,7 @@ export const articleSlice = createSlice({
       })
       .addCase(fetchArticle.fulfilled, (state, action) => {
         state.status = 'resolved';
-        state.currentArticle = action.payload.article;
+        state.article = action.payload.article;
       })
       .addCase(fetchArticle.rejected, (state, action) => {
         state.errorMessage = action.payload;
