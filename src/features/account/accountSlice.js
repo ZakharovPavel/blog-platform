@@ -5,11 +5,9 @@ export const accountSlice = createSlice({
   name: 'account',
   initialState: {
     value: null,
-    // currentUser: null,
     currentUser: null,
     token: null,
-    isLoggedIn: localStorage.length > 0,
-    // isLoggedIn: true,
+    isLoggedIn: localStorage.getItem('token'),
     status: null,
     error: null,
     accountErrorMessage: '',
@@ -34,14 +32,11 @@ export const accountSlice = createSlice({
         state.status = 'loading';
         state.accountErrorMessage = '';
       })
-      .addCase(createAccount.fulfilled, (state, action) => {
+      .addCase(createAccount.fulfilled, (state) => {
         state.status = 'resolved';
-        // state.currentUser = action.payload.user;
-
-        console.log(`create payload: ${action.payload}`);
       })
       .addCase(createAccount.rejected, (state) => {
-        // state.errorMessage = action.payload;
+        state.status = 'error';
         state.accountErrorMessage = 'createAccount error';
       })
       .addCase(loginAccount.pending, (state) => {
@@ -53,16 +48,12 @@ export const accountSlice = createSlice({
         state.isLoggedIn = true;
         state.currentUser = action.payload.user;
 
-        localStorage.setItem(action.payload.user.username, action.payload.user.token);
+        localStorage.setItem('token', action.payload.user.token);
 
         state.token = action.payload.user.token;
-
-        console.log(`login payload: ${action.payload}`);
-        console.log(action.payload);
-        console.log(state.currentUser);
       })
       .addCase(loginAccount.rejected, (state) => {
-        // state.errorMessage = action.payload;
+        state.status = 'error';
         state.accountErrorMessage = 'loginAccount error';
       })
 
@@ -75,13 +66,9 @@ export const accountSlice = createSlice({
         state.isLoggedIn = true;
         state.currentUser = action.payload.user;
         state.token = action.payload.user.token;
-
-        console.log(`get user payload: ${action.payload}`);
-        console.log(action.payload);
-        console.log(state.currentUser);
       })
       .addCase(getUser.rejected, (state) => {
-        // state.errorMessage = action.payload;
+        state.status = 'error';
         state.accountErrorMessage = 'getUser error';
       })
 
@@ -92,12 +79,9 @@ export const accountSlice = createSlice({
       .addCase(editProfile.fulfilled, (state, action) => {
         state.status = 'resolved';
         state.currentUser = action.payload.user;
-
-        console.log(`edit payload: ${action.payload}`);
-        console.log(action.payload);
       })
       .addCase(editProfile.rejected, (state) => {
-        // state.errorMessage = action.payload;
+        state.status = 'error';
         state.accountErrorMessage = 'editProfile error';
       });
   },

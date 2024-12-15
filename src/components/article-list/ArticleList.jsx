@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchArticles, generateKey, transformArticle } from '../../utils/ArticleService';
+import { fetchArticles, generateKey } from '../../utils/ArticleService';
 import styles from './ArticleList.module.scss';
 import { Alert, Pagination, Spin } from 'antd';
 import { useEffect } from 'react';
@@ -11,15 +11,14 @@ const ArticleList = () => {
   const { articles, articlesCount, status, currentPage } = useSelector((state) => state.article);
 
   useEffect(() => {
-    dispatch(fetchArticles());
+    dispatch(fetchArticles(currentPage));
   }, []);
 
   const articlesData = articles.map((article) => {
-    const newArticle = transformArticle(article, generateKey(article.slug));
-    const { id } = newArticle;
+    const id = generateKey(article.slug);
 
     return (
-      <ArticlePreview key={id} newArticle={newArticle} />
+      <ArticlePreview key={id} newArticle={article} />
     );
   });
 
@@ -42,7 +41,7 @@ const ArticleList = () => {
           defaultCurrent={1}
           current={currentPage}
           total={articlesCount}
-          pageSize={20}
+          pageSize={5}
           align="center"
           showSizeChanger={false}
           onChange={(page) => {
@@ -59,8 +58,6 @@ const ArticleList = () => {
       {errorMessage}
       {noData}
       {content}
-      {/* <ul className={styles['article-list']}>{articles}</ul>
-      <Pagination defaultCurrent={1} total={articlesCount} pageSize={20} align="center" onChange={(page) => { dispatch(fetchArticles(page))}} /> */}
     </section>
   );
 };

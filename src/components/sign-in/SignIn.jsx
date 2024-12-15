@@ -5,12 +5,11 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAccount } from '../../utils/AccountService';
-import { useEffect } from 'react';
 
 const SignIn = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isLoggedIn, accountErrorMessage } = useSelector((state) => state.account);
+  const { accountErrorMessage } = useSelector((state) => state.account);
 
   const {
     register,
@@ -23,19 +22,10 @@ const SignIn = () => {
   });
 
   const onSubmit = (data) => {
-    // alert(JSON.stringify(data));
     dispatch(loginAccount(data));
-
-    // console.log(data);
-
+    navigate('/');
     reset();
   };
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate('/');
-    }
-  }, [isLoggedIn, navigate]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles['sign-form']}>

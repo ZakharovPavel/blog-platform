@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchArticle, fetchArticles } from '../../utils/ArticleService';
+import { createArticle, favoriteArticle, fetchArticle, fetchArticles, unfavoriteArticle, updateArticle } from '../../utils/ArticleService';
 
 export const articleSlice = createSlice({
   name: 'article',
@@ -11,13 +11,21 @@ export const articleSlice = createSlice({
     currentPage: 1,
     fetchOffset: 0,
     pageSize: 5,
+    articleFormMode: null,
+    isEdit: false,
     status: null,
     error: null,
-    errorMessage: '',
+    articleErrorMessage: '',
   },
   reducers: {
     setCurrentPage: (state, action) => {
       state.currentPage = action.payload;
+    },
+    setArticleFormMode: (state, action) => {
+      state.articleFormMode = action.payload;
+    },
+    setIsEdit: (state, action) => {
+      state.isEdit = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -31,8 +39,10 @@ export const articleSlice = createSlice({
         state.articlesCount = action.payload.articlesCount;
       })
       .addCase(fetchArticles.rejected, (state, action) => {
-        state.errorMessage = action.payload;
+        state.status = 'error';
+        state.articleErrorMessage = action.payload;
       })
+
       .addCase(fetchArticle.pending, (state) => {
         state.status = 'loading';
       })
@@ -41,11 +51,60 @@ export const articleSlice = createSlice({
         state.article = action.payload.article;
       })
       .addCase(fetchArticle.rejected, (state, action) => {
-        state.errorMessage = action.payload;
+        state.status = 'error';
+        state.articleErrorMessage = action.payload;
+      })
+
+      .addCase(createArticle.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(createArticle.fulfilled, (state, action) => {
+        state.status = 'resolved';
+        state.article = action.payload.article;
+      })
+      .addCase(createArticle.rejected, (state, action) => {
+        state.status = 'error';
+        state.articleErrorMessage = action.payload;
+      })
+
+      .addCase(updateArticle.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(updateArticle.fulfilled, (state, action) => {
+        state.status = 'resolved';
+        state.article = action.payload.article;
+      })
+      .addCase(updateArticle.rejected, (state, action) => {
+        state.status = 'error';
+        state.articleErrorMessage = action.payload;
+      })
+
+      .addCase(favoriteArticle.pending, () => {
+      })
+      .addCase(favoriteArticle.fulfilled, (state, action) => {
+        state.status = 'resolved';
+        state.article = action.payload.article;
+        state.articles = state.articles.map((article) => article.slug === action.payload.article.slug ? action.payload.article : article);
+      })
+      .addCase(favoriteArticle.rejected, (state, action) => {
+        state.status = 'error';
+        state.articleErrorMessage = action.payload;
+      })
+
+      .addCase(unfavoriteArticle.pending, () => {
+      })
+      .addCase(unfavoriteArticle.fulfilled, (state, action) => {
+        state.status = 'resolved';
+        state.article = action.payload.article;
+        state.articles = state.articles.map((article) => article.slug === action.payload.article.slug ? action.payload.article : article);
+      })
+      .addCase(unfavoriteArticle.rejected, (state, action) => {
+        state.status = 'error';
+        state.articleErrorMessage = action.payload;
       });
   },
 });
 
-export const { setCurrentPage } = articleSlice.actions;
+export const { setCurrentPage, setArticleFormMode, setIsEdit } = articleSlice.actions;
 
 export default articleSlice.reducer;

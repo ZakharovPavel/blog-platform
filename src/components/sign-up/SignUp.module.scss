@@ -31,6 +31,11 @@
     color: #262626;
   }
 
+  .sign-form__label {
+    display: flex;
+    flex-direction: column;
+  }
+
   .sign-form__label-text {
     //styleName: Regular / 14px | 22px;
     // font-family: Roboto;
@@ -43,21 +48,26 @@
     color: #262626;
   }
 
-  // .sign-form__label-input {
-  //   height: 40px;
-  //   width: 320px;
-  //   padding: 8px 12px;
-  //   border: 1px solid #D9D9D9;
-  //   border-radius: 4px;
-  // }
+  .sign-form__label-input {
+    height: 40px;
+    width: 320px;
+    padding: 8px 12px;
+    border: 1px solid #D9D9D9;
+    border-radius: 4px;
+  }
 
+  input:focus {
+    border: 2px solid #D9D9D9;
+  }
+  
   // .sign-form__label-input--error {
   //   height: 40px;
   //   width: 320px;
   //   padding: 8px 12px;
-  //   border: 1px solid #F5222D;
+  //   border: 1px solid #f7b5b5;
   //   border-radius: 4px;
   // }
+
 
   .sign-form__label-input--error {
     height: 40px;
@@ -73,10 +83,6 @@
     padding: 8px 12px;
     border: 1px solid #F5222D;
     border-radius: 4px;
-  }
-
-  input:focus {
-    border: 2px solid #D9D9D9;
   }
 
   input::placeholder {

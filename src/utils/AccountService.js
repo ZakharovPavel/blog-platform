@@ -23,12 +23,9 @@ const createAccountForThunk = async (data, { rejectWithValue }) => {
       throw new Error("Can't create new user");
     }
     const result = await response.json();
-
-    console.log(result);
     
     return result;
   } catch (error) {
-    console.error(error);
     return rejectWithValue(error.message);
   }
 };
@@ -58,11 +55,8 @@ const loginAccountForThunk = async (data, { rejectWithValue }) => {
     }
     const result = await response.json();
     
-    console.log(result);
-    
     return result;
   } catch (error) {
-    // console.error(error);
     return rejectWithValue(error.message);
   }
 };
@@ -77,7 +71,6 @@ const editProfileForThunk = async (data, { rejectWithValue }) => {
     const editUser = {
       user: {
         email,
-        // token: localStorage.getItem(localStorage.key(0)),
         token,
         username,
         bio: "I work at State Farm.",
@@ -97,11 +90,8 @@ const editProfileForThunk = async (data, { rejectWithValue }) => {
     }
     const result = await response.json();
 
-    console.log(result);
-
     return result;
   } catch (error) {
-    // console.error(error);
     return rejectWithValue(error.message);
   }
 };
@@ -124,11 +114,8 @@ const getUserForThunk = async (_, { rejectWithValue }) => {
     }
     const result = await response.json();
 
-    console.log(result);
-
     return result;
   } catch (error) {
-    // console.error(error);
     return rejectWithValue(error.message);
   }
 };

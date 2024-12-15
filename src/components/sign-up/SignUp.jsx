@@ -5,11 +5,10 @@ import { schema } from './schema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { createAccount } from '../../utils/AccountService';
-import { useEffect } from 'react';
 
 const SignUp = () => {
   const dispatch = useDispatch();
-  const { isLoggedIn, accountErrorMessage } = useSelector((state) => state.account);
+  const { accountErrorMessage } = useSelector((state) => state.account);
   const navigate = useNavigate();
 
   const {
@@ -23,17 +22,10 @@ const SignUp = () => {
   });
 
   const onSubmit = (data) => {
-    // alert(JSON.stringify(data));
-    console.log(data);
     dispatch(createAccount(data));
     reset();
+    navigate('/');
   };
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate('/');
-    }
-  }, [isLoggedIn, navigate]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles['sign-form']}>

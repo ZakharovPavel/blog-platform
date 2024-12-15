@@ -31,6 +31,11 @@
     color: #262626;
   }
 
+  .sign-form__label {
+    display: flex;
+    flex-direction: column;
+  }
+
   .sign-form__label-text {
     //styleName: Regular / 14px | 22px;
     // font-family: Roboto;

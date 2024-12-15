@@ -14,26 +14,15 @@ const EditProfile = () => {
     register,
     formState: { errors, isValid },
     handleSubmit,
-    reset,
   } = useForm({
     resolver: yupResolver(schema),
     mode: 'onBlur',
-    // defaultValues: {
-    //   username: currentUser.username,
-    //   email: currentUser.email,
-    //   password: currentUser.password,
-    //   avatar: currentUser.image,
-    // }
-    // defaultValues: async () => getUser().user,
   });
 
   const onSubmit = (data) => {
-    // alert(JSON.stringify(data));
-    console.log(data);
     
     const profileData = {...data, token};
     dispatch(editProfile(profileData));
-    reset();
   };
 
   if (!currentUser) {
