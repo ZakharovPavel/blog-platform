@@ -14,7 +14,7 @@ body {
 }
 
 body {
-  background-color: #EBEEF3;
+  background-color: #ebeef3;
 }
 
 ul {
@@ -41,9 +41,9 @@ input {
   // cursor: text;
 }
 
-input[type=text],
-input[type=email],
-input[type=password],
+input[type='text'],
+input[type='email'],
+input[type='password'],
 textarea {
   all: unset;
   box-sizing: border-box;

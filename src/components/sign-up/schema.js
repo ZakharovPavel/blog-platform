@@ -9,11 +9,7 @@ export const schema = yup.object().shape({
     .min(3, 'Username needs to be at least 3 characters')
     .max(20, 'Username needs to be less than 20 characters')
     .required('Required field'),
-  email: yup
-    .string()
-    .trim()
-    .matches(emailRegex, 'Wrong email format')
-    .required('Required field'),
+  email: yup.string().trim().matches(emailRegex, 'Wrong email format').required('Required field'),
   password: yup
     .string()
     .trim()
@@ -27,7 +23,5 @@ export const schema = yup.object().shape({
     .min(6, 'Your password needs to be at least 6 characters')
     .max(40, 'Your password needs to ba less than 40 characters')
     .required('Required field'),
-  terms: yup.
-    boolean()
-    .oneOf([true], 'You must accept the terms and conditions'),
-})
+  terms: yup.boolean().oneOf([true], 'You must accept the terms and conditions'),
+});

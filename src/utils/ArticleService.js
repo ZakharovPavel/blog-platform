@@ -13,7 +13,7 @@ const fetchArticlesForThunk = async (page, { rejectWithValue }) => {
     });
 
     if (!response.ok) {
-      throw new Error('Can\'t fetch articles');
+      throw new Error("Can't fetch articles");
     }
 
     const result = await response.json();
@@ -38,7 +38,7 @@ const fetchArticleForThunk = async (slug, { rejectWithValue }) => {
     });
 
     if (!response.ok) {
-      throw new Error('Can\'t fetch article');
+      throw new Error("Can't fetch article");
     }
 
     const result = await response.json();
@@ -62,8 +62,8 @@ const createArticleForThunk = async (data, { rejectWithValue }) => {
         body,
         tagList,
         token,
-      }
-    }
+      },
+    };
     const response = await fetch(`${apiBase}/articles`, {
       method: 'POST',
       headers: {
@@ -97,8 +97,8 @@ const updateArticleForThunk = async (data, { rejectWithValue }) => {
         body,
         tagList,
         token,
-      }
-    }
+      },
+    };
     const response = await fetch(`${apiBase}/articles/${slugValue}`, {
       method: 'PUT',
       headers: {
@@ -222,4 +222,14 @@ function generateKey(prefix) {
   return `${prefix}_${Math.floor(100000 + Math.random() * 900000)}`;
 }
 
-export { fetchArticles, fetchArticle, createArticle, updateArticle, deleteArticle, favoriteArticle, unfavoriteArticle, transformArticle, generateKey };
+export {
+  fetchArticles,
+  fetchArticle,
+  createArticle,
+  updateArticle,
+  deleteArticle,
+  favoriteArticle,
+  unfavoriteArticle,
+  transformArticle,
+  generateKey,
+};

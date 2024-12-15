@@ -20,13 +20,12 @@ const EditProfile = () => {
   });
 
   const onSubmit = (data) => {
-    
-    const profileData = {...data, token};
+    const profileData = { ...data, token };
     dispatch(editProfile(profileData));
   };
 
   if (!currentUser) {
-    return <Spin size="large" />
+    return <Spin size="large" />;
   }
 
   return (

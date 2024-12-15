@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import styles from './ArticleForm.module.scss';
 import { useFieldArray, useForm } from 'react-hook-form';
@@ -16,7 +17,7 @@ const ArticleForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { slugValue } = useParams();
-  
+
   const {
     register,
     formState: { errors, isValid },
@@ -26,8 +27,11 @@ const ArticleForm = () => {
     resolver: yupResolver(schema),
     mode: 'onBlur',
     defaultValues: {
-      tagList: isEdit && currentUser?.username === article?.author.username ? article?.tagList.map((tag) => ({ name: tag })) : [{ name: '' }],
-    }
+      tagList:
+        isEdit && currentUser?.username === article?.author.username
+          ? article?.tagList.map((tag) => ({ name: tag }))
+          : [{ name: '' }],
+    },
   });
 
   const { fields, append, remove } = useFieldArray({
@@ -35,7 +39,7 @@ const ArticleForm = () => {
     control,
   });
 
-    //
+  //
   useEffect(() => {
     if (slugValue) {
       dispatch(fetchArticle(slugValue));
@@ -63,7 +67,7 @@ const ArticleForm = () => {
       tagList: data.tagList.map((tag) => tag.name),
       token,
       slugValue,
-    }
+    };
 
     if (!isEdit) {
       dispatch(createArticle(newData));
@@ -81,14 +85,22 @@ const ArticleForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles['sign-form']}>
-      {currentUser?.username === article?.author?.username && isEdit ? <h3 className={styles['sign-form__title']}>Edit article</h3> : <h3 className={styles['sign-form__title']}>Create new article</h3>}
-      
+      {currentUser?.username === article?.author?.username && isEdit ? (
+        <h3 className={styles['sign-form__title']}>Edit article</h3>
+      ) : (
+        <h3 className={styles['sign-form__title']}>Create new article</h3>
+      )}
+
       <label className={styles['sign-form__label']}>
         <span className={styles['sign-form__label-text']}>Title</span>
         <input
           {...register('title')}
           type="text"
-          className={errors?.title ? styles['sign-form__label-input--error'] : [styles['sign-form__label-input'], styles['sign-form__label-input--article-form']].join(' ')}
+          className={
+            errors?.title
+              ? styles['sign-form__label-input--error']
+              : [styles['sign-form__label-input'], styles['sign-form__label-input--article-form']].join(' ')
+          }
           placeholder="Title"
           defaultValue={isEdit ? article?.title : null}
         />
@@ -99,7 +111,11 @@ const ArticleForm = () => {
         <input
           {...register('description')}
           type="text"
-          className={errors?.description ? styles['sign-form__label-input--error'] : [styles['sign-form__label-input'], styles['sign-form__label-input--article-form']].join(' ')}
+          className={
+            errors?.description
+              ? styles['sign-form__label-input--error']
+              : [styles['sign-form__label-input'], styles['sign-form__label-input--article-form']].join(' ')
+          }
           placeholder="Description"
           defaultValue={isEdit ? article?.description : null}
         />
@@ -110,7 +126,11 @@ const ArticleForm = () => {
         <textarea
           {...register('body')}
           type="text"
-          className={errors?.body ? styles['sign-form__label-input--error-textarea'] : [styles['sign-form__label-input'], styles['sign-form__label-input--article-form-text']].join(' ')}
+          className={
+            errors?.body
+              ? styles['sign-form__label-input--error-textarea']
+              : [styles['sign-form__label-input'], styles['sign-form__label-input--article-form-text']].join(' ')
+          }
           defaultValue={isEdit ? article?.body : null}
           placeholder="Text"
         />
@@ -126,33 +146,50 @@ const ArticleForm = () => {
                   {...register(`tagList.${index}.name`)}
                   type="text"
                   className={
-                    errors?.tagList ? [styles['sign-form__label-input--error'], styles['sign-form__label-input--tag-list-error']].join(' ') : styles['sign-form__label-input']
+                    errors?.tagList
+                      ? [
+                          styles['sign-form__label-input--error'],
+                          styles['sign-form__label-input--tag-list-error'],
+                        ].join(' ')
+                      : styles['sign-form__label-input']
                   }
                   placeholder="Tag"
                 />
-                {fields.length > 1 ? 
-                  <button type='button' className={styles['article-form__delete-tag-button']} onClick={() => remove(index)}>
+                {fields.length > 1 ? (
+                  <button
+                    type="button"
+                    className={styles['article-form__delete-tag-button']}
+                    onClick={() => remove(index)}
+                  >
                     Delete
                   </button>
-                : null}
-                {index === fields.length - 1 ? 
-                  <button type='button' className={styles['article-form__add-tag-button']} onClick={() => append({ name: '' })}>
+                ) : null}
+                {index === fields.length - 1 ? (
+                  <button
+                    type="button"
+                    className={styles['article-form__add-tag-button']}
+                    onClick={() => append({ name: '' })}
+                  >
                     Add tag
                   </button>
-                : null}
+                ) : null}
               </li>
-            )
+            );
           })}
-          
         </ul>
-
 
         <span className={styles['sign-form__validation-error-text']}>{errors?.tagList?.message}</span>
       </label>
       {accountErrorMessage === 'createAccount error' ? (
-        <span className={styles['sign-form__validation-error-text']}>Username or email is already taken. Try others</span>
+        <span className={styles['sign-form__validation-error-text']}>
+          Username or email is already taken. Try others
+        </span>
       ) : null}
-      <button type="submit" className={[styles['sign-form__button'], styles['sign-form__button--article-form']].join(' ')} disabled={!isValid}>
+      <button
+        type="submit"
+        className={[styles['sign-form__button'], styles['sign-form__button--article-form']].join(' ')}
+        disabled={!isValid}
+      >
         Send
       </button>
     </form>

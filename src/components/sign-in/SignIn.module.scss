@@ -6,7 +6,7 @@
   flex-direction: column;
   gap: 21px;
   overflow: hidden;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 5px;
   box-shadow: 0 0.61px 2.93px 0 rgba(0, 0, 0, 0.02);
   box-shadow: 0 1.46px 7.05px 0 rgba(0, 0, 0, 0.03);
@@ -49,14 +49,14 @@
   }
 
   input:focus {
-    border: 2px solid #D9D9D9;
+    border: 2px solid #d9d9d9;
   }
 
   .sign-form__label-input {
     height: 40px;
     width: 320px;
     padding: 8px 12px;
-    border: 1px solid #D9D9D9;
+    border: 1px solid #d9d9d9;
     border-radius: 4px;
   }
 
@@ -88,7 +88,7 @@
     height: 40px;
     width: 320px;
     padding: 8px 12px;
-    border: 1px solid #F5222D;
+    border: 1px solid #f5222d;
     border-radius: 4px;
   }
 
@@ -101,7 +101,7 @@
     text-align: left;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
-    color: #BFBFBF;
+    color: #bfbfbf;
   }
 
   // .sign-form__label-input:focus {
@@ -115,9 +115,9 @@
     // align-items: center;
     padding-top: 10px;
     align-self: flex-start;
-    border-top: 1px solid #E8E8E8;
+    border-top: 1px solid #e8e8e8;
   }
-  
+
   .form-agreement__text {
     display: flex;
     align-self: center;
@@ -146,7 +146,7 @@
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
     color: #ffffff;
-    background-color: #1890FF;
+    background-color: #1890ff;
     border-radius: 5px;
     border-style: none;
     cursor: pointer;
@@ -161,7 +161,7 @@
     text-align: center;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
-    color: #8C8C8C;
+    color: #8c8c8c;
   }
 
   .sign-form__transfer-link {
@@ -172,7 +172,7 @@
     text-align: center;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
-    color: #1890FF;
+    color: #1890ff;
   }
 
   .sign-form__transfer-link:hover {
@@ -192,29 +192,28 @@
     text-align: left;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
-    color: #F5222D;
+    color: #f5222d;
   }
-
 }
 
 // customize checkbox
 
 /* для элемента input c type="checkbox" */
-.form-agreement>input {
+.form-agreement > input {
   position: absolute;
   z-index: -1;
   opacity: 0;
 }
 
 /* для элемента label, связанного с .custom-checkbox */
-.form-agreement>span {
+.form-agreement > span {
   // display: inline-flex;
   // align-items: center;
   user-select: none;
 }
 
 /* создание в label псевдоэлемента before со следующими стилями */
-.form-agreement>span::before {
+.form-agreement > span::before {
   content: '';
   display: inline-block;
   width: 16px;
@@ -231,35 +230,35 @@
 }
 
 /* стили при наведении курсора на checkbox */
-.form-agreement>input:not(:disabled):not(:checked)+span:hover::before {
+.form-agreement > input:not(:disabled):not(:checked) + span:hover::before {
   border-color: #b3d7ff;
 }
 
 /* стили для активного чекбокса (при нажатии на него) */
-.form-agreement>input:not(:disabled):active+span::before {
+.form-agreement > input:not(:disabled):active + span::before {
   background-color: #b3d7ff;
   border-color: #b3d7ff;
 }
 
 /* стили для чекбокса, находящегося в фокусе */
-.form-agreement>input:focus+span::before {
+.form-agreement > input:focus + span::before {
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 /* стили для чекбокса, находящегося в фокусе и не находящегося в состоянии checked */
-.form-agreement>input:focus:not(:checked)+span::before {
+.form-agreement > input:focus:not(:checked) + span::before {
   border-color: #80bdff;
 }
 
 /* стили для чекбокса, находящегося в состоянии checked */
-.form-agreement>input:checked+span::before {
-  border-color: #1890FF;
-  background-color: #1890FF;
+.form-agreement > input:checked + span::before {
+  border-color: #1890ff;
+  background-color: #1890ff;
   background-image: url("data:image/svg+xml,%3Csvg width='11' height='9' viewBox='0 0 11 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.91308 4.03516H1.91326C1.99256 4.03525 2.07081 4.05331 2.14213 4.08798C2.21341 4.12262 2.27591 4.17295 2.32497 4.2352L1.91308 4.03516ZM1.91308 4.03516H1.09394C0.890308 4.03516 0.776602 4.26975 0.902321 4.4292L0.902371 4.42927L4.11214 8.49567L4.11218 8.49573C4.32247 8.76188 4.72568 8.76114 4.93667 8.49617L4.93708 8.49566L10.6597 1.24398C10.6598 1.24378 10.66 1.24358 10.6602 1.24338C10.7884 1.08295 10.6699 0.85 10.4689 0.85H9.6498C9.48941 0.85 9.33668 0.9235 9.2376 1.05044C9.23751 1.05055 9.23742 1.05066 9.23734 1.05077L4.52403 7.02157M1.91308 4.03516L4.52403 7.02157M4.52403 7.02157L2.32506 4.23531L4.52403 7.02157Z' fill='white' stroke='white' stroke-width='0.3'/%3E%3C/svg%3E");
 }
 
 /* стили для чекбокса, находящегося в состоянии disabled */
-.form-agreement>input:disabled+span::before {
+.form-agreement > input:disabled + span::before {
   background-color: #e9ecef;
 }
 

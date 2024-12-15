@@ -4,14 +4,14 @@ const apiBase = 'https://blog-platform.kata.academy/api';
 
 const createAccountForThunk = async (data, { rejectWithValue }) => {
   try {
-    const {username, email, password} = data;
+    const { username, email, password } = data;
     const newUser = {
       user: {
         username,
         email,
         password,
-      }
-    }
+      },
+    };
     const response = await fetch(`${apiBase}/users`, {
       method: 'POST',
       headers: {
@@ -23,7 +23,7 @@ const createAccountForThunk = async (data, { rejectWithValue }) => {
       throw new Error("Can't create new user");
     }
     const result = await response.json();
-    
+
     return result;
   } catch (error) {
     return rejectWithValue(error.message);
@@ -41,8 +41,8 @@ const loginAccountForThunk = async (data, { rejectWithValue }) => {
       user: {
         email,
         password,
-      }
-    }
+      },
+    };
     const response = await fetch(`${apiBase}/users/login`, {
       method: 'POST',
       headers: {
@@ -54,7 +54,7 @@ const loginAccountForThunk = async (data, { rejectWithValue }) => {
       throw new Error("Can't login");
     }
     const result = await response.json();
-    
+
     return result;
   } catch (error) {
     return rejectWithValue(error.message);
@@ -73,10 +73,10 @@ const editProfileForThunk = async (data, { rejectWithValue }) => {
         email,
         token,
         username,
-        bio: "I work at State Farm.",
+        bio: 'I work at State Farm.',
         image: avatar,
-      }
-    }
+      },
+    };
     const response = await fetch(`${apiBase}/user`, {
       method: 'PUT',
       headers: {

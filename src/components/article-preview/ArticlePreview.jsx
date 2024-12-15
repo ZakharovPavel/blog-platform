@@ -10,16 +10,16 @@ const ArticlePreview = ({ newArticle }) => {
   const dispatch = useDispatch();
   const { isLoggedIn, token } = useSelector((state) => state.account);
   const { slug } = newArticle;
-  
+
   const { Text } = Typography;
 
   const handleFavorite = () => {
     dispatch(favoriteArticle({ token, slug }));
-  }
+  };
 
   const handleUnfavorite = () => {
     dispatch(unfavoriteArticle({ token, slug }));
-  }
+  };
 
   return (
     <li className={styles['article']}>

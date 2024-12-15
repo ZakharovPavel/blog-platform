@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 
   &__home-link {
     font-size: 18px;
@@ -14,7 +14,7 @@
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
     text-decoration: none;
-    color: #000000D9;
+    color: #000000d9;
   }
 
   &__right-side {
@@ -43,7 +43,7 @@
   .sign-button--log-out {
     border-radius: 5px;
     border: 1px 0px 0px 0px;
-    border: 1px solid #000000BF;
+    border: 1px solid #000000bf;
     opacity: 0px;
   }
 
@@ -59,7 +59,7 @@
     align-items: center;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
-    color: #52C41A;
-    border: 1px solid #52C41A;
+    color: #52c41a;
+    border: 1px solid #52c41a;
   }
 }

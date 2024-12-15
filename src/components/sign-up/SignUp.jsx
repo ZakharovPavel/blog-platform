@@ -78,7 +78,9 @@ const SignUp = () => {
         <div className={styles['sign-form__validation-error-text']}>{errors?.terms?.message}</div>
       </label>
       {accountErrorMessage === 'createAccount error' ? (
-        <span className={styles['sign-form__validation-error-text']}>Username or email is already taken. Try others</span>
+        <span className={styles['sign-form__validation-error-text']}>
+          Username or email is already taken. Try others
+        </span>
       ) : null}
       <button type="submit" className={styles['sign-form__button']} disabled={!isValid}>
         Create

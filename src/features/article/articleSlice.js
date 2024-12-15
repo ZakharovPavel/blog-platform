@@ -1,5 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createArticle, favoriteArticle, fetchArticle, fetchArticles, unfavoriteArticle, updateArticle } from '../../utils/ArticleService';
+import {
+  createArticle,
+  favoriteArticle,
+  fetchArticle,
+  fetchArticles,
+  unfavoriteArticle,
+  updateArticle,
+} from '../../utils/ArticleService';
 
 export const articleSlice = createSlice({
   name: 'article',
@@ -79,24 +86,26 @@ export const articleSlice = createSlice({
         state.articleErrorMessage = action.payload;
       })
 
-      .addCase(favoriteArticle.pending, () => {
-      })
+      .addCase(favoriteArticle.pending, () => {})
       .addCase(favoriteArticle.fulfilled, (state, action) => {
         state.status = 'resolved';
         state.article = action.payload.article;
-        state.articles = state.articles.map((article) => article.slug === action.payload.article.slug ? action.payload.article : article);
+        state.articles = state.articles.map((article) =>
+          article.slug === action.payload.article.slug ? action.payload.article : article
+        );
       })
       .addCase(favoriteArticle.rejected, (state, action) => {
         state.status = 'error';
         state.articleErrorMessage = action.payload;
       })
 
-      .addCase(unfavoriteArticle.pending, () => {
-      })
+      .addCase(unfavoriteArticle.pending, () => {})
       .addCase(unfavoriteArticle.fulfilled, (state, action) => {
         state.status = 'resolved';
         state.article = action.payload.article;
-        state.articles = state.articles.map((article) => article.slug === action.payload.article.slug ? action.payload.article : article);
+        state.articles = state.articles.map((article) =>
+          article.slug === action.payload.article.slug ? action.payload.article : article
+        );
       })
       .addCase(unfavoriteArticle.rejected, (state, action) => {
         state.status = 'error';

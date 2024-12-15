@@ -25,7 +25,7 @@ const Header = () => {
   const handleCreateArticle = () => {
     dispatch(setIsEdit(false));
     navigate('new-article');
-  }
+  };
 
   const onToggleLogOut = () => {
     dispatch(handleLogOut());
@@ -40,16 +40,20 @@ const Header = () => {
       >
         Create article
       </button>
-        <button
-          className={[styles['sign-button'], styles['header__profile-preview-button']].join(' ')}
-          onClick={() => navigate('profile')}
-        >
-          <span className={styles['header__profile-name']}>{currentUser?.username}</span>
-          <Avatar
-            size={46}
-            src={currentUser?.image ? currentUser?.image : `https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541`}
-          />
-        </button>
+      <button
+        className={[styles['sign-button'], styles['header__profile-preview-button']].join(' ')}
+        onClick={() => navigate('profile')}
+      >
+        <span className={styles['header__profile-name']}>{currentUser?.username}</span>
+        <Avatar
+          size={46}
+          src={
+            currentUser?.image
+              ? currentUser?.image
+              : `https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541`
+          }
+        />
+      </button>
       <button
         className={[styles['sign-button'], styles['sign-button--log-out']].join(' ')}
         onClick={() => onToggleLogOut()}

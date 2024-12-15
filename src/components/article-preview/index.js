@@ -1,3 +1,3 @@
-import ArticlePreview from "./ArticlePreview";
+import ArticlePreview from './ArticlePreview';
 
 export default ArticlePreview;

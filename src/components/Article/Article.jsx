@@ -33,7 +33,7 @@ const Article = () => {
     const data = {
       slugValue,
       token,
-    }
+    };
 
     dispatch(deleteArticle(data));
     navigate(`/`);
@@ -52,20 +52,20 @@ const Article = () => {
     const data = {
       slug: slugValue,
       token,
-    }
-    
+    };
+
     dispatch(favoriteArticle(data));
-  }
+  };
 
   const handleUnfavorite = () => {
     console.log(slugValue);
     const data = {
       slug: slugValue,
       token,
-    }
+    };
 
     dispatch(unfavoriteArticle(data));
-  }
+  };
 
   return (
     <article className={styles['article']}>
@@ -112,7 +112,7 @@ const Article = () => {
                 onConfirm={handleDelete}
                 okText="Yes"
                 cancelText="No"
-                placement='rightTop'
+                placement="rightTop"
               >
                 <button type="button" className={styles['article-header__delete-button']}>
                   Delete
