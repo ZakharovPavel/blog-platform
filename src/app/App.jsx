@@ -6,12 +6,11 @@ import { Route, Routes } from 'react-router-dom';
 import SignIn from '../components/sign-in/SignIn';
 import SignUp from '../components/sign-up/SignUp';
 import EditProfile from '../components/edit-profile/EditProfile';
-import Header from '../components/Header/Header';
+import Header from '../components/header/Header';
 import ArticleForm from '../components/article-form/ArticleForm';
-import Article from '../components/Article/Article';
+import Article from '../components/article/Article';
 
 function App() {
-
   return (
     <div className={styles['wrapper']}>
       <Header />
