@@ -45,7 +45,12 @@ const ArticlePreview = ({ newArticle }) => {
             </div>
           </div>
           {newArticle.tagList &&
-            newArticle.tagList.map((tag, index) => <Tag key={`${newArticle.slug}_${index}`}>{tag}</Tag>)}
+            newArticle.tagList.map((tag, index) => {
+              if (tag === '') {
+                return;
+              }
+              return <Tag key={`${newArticle.slug}_${index}`}>{tag}</Tag>;
+            })}
         </div>
         <div className={styles['article-header__right-side']}>
           <div className={styles['article-header__author-info-container']}>

@@ -85,7 +85,13 @@ const Article = () => {
             </div>
           </div>
           <div className={styles['article-header__tags-container']}>
-            {article.tagList && article.tagList.map((tag, index) => <Tag key={`${article.slug}_${index}`}>{tag}</Tag>)}
+            {article.tagList &&
+              article.tagList.map((tag, index) => {
+                if (tag === '') {
+                  return;
+                }
+                return <Tag key={`${article.slug}_${index}`}>{tag}</Tag>;
+              })}
           </div>
           <Text className={styles['article-description']} type="secondary">
             {article.description}
