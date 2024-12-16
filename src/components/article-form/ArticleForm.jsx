@@ -18,13 +18,13 @@ const ArticleForm = () => {
   const location = useLocation();
   const { slugValue } = useParams();
 
-  let editableTags;
+  // let editableTags;
 
-  if (currentUser?.username === article?.author?.username && isEdit) {
-    editableTags = article?.tagList?.map((tag) => {
-      return { name: tag };
-    });
-  }
+  // if (currentUser?.username === article?.author?.username && isEdit) {
+  //   editableTags = article?.tagList?.map((tag) => {
+  //     return { name: tag };
+  //   });
+  // }
 
   const {
     register,
@@ -36,7 +36,8 @@ const ArticleForm = () => {
     resolver: yupResolver(schema),
     mode: 'onBlur',
     defaultValues: {
-      tagList: currentUser?.username === article?.author?.username && isEdit ? editableTags : [{ name: '' }],
+      // tagList: currentUser?.username === article?.author?.username && isEdit ? editableTags : [{ name: '' }],
+      tagList: [{ name: '' }],
     },
   });
 
@@ -68,6 +69,9 @@ const ArticleForm = () => {
     if (location.pathname === `/articles/${slugValue}/edit` && currentUser?.username === article?.author?.username) {
       dispatch(setIsEdit(true));
     }
+    if (location.pathname === `/new-article` && currentUser?.username === article?.author?.username) {
+      dispatch(setIsEdit(false));
+    }
   }, [dispatch, location.pathname, slugValue, isEdit]);
 
   useEffect(() => {
@@ -86,6 +90,7 @@ const ArticleForm = () => {
 
     if (!isEdit) {
       dispatch(createArticle(newData));
+      dispatch(setIsEdit(true));
       navigate('/');
     } else {
       dispatch(updateArticle(newData));

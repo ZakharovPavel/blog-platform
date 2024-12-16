@@ -15,7 +15,7 @@ const Article = () => {
   const navigate = useNavigate();
   const { slugValue } = useParams();
   const { isLoggedIn, currentUser, token } = useSelector((state) => state.account);
-  const { article, status, isEdit } = useSelector((state) => state.article);
+  const { article, status } = useSelector((state) => state.article);
 
   useEffect(() => {
     dispatch(fetchArticle(slugValue));
@@ -37,18 +37,15 @@ const Article = () => {
 
     dispatch(deleteArticle(data));
     navigate(`/`);
-    console.log('deleted');
   };
 
   const handleEdit = () => {
     dispatch(fetchArticle(slugValue));
     dispatch(setIsEdit(true));
     navigate(`/articles/${slugValue}/edit`);
-    console.log(`to edit. isEdit: ${isEdit}`);
   };
 
   const handleFavorite = () => {
-    console.log(slugValue);
     const data = {
       slug: slugValue,
       token,
@@ -58,7 +55,6 @@ const Article = () => {
   };
 
   const handleUnfavorite = () => {
-    console.log(slugValue);
     const data = {
       slug: slugValue,
       token,

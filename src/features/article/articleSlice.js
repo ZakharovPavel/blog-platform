@@ -19,7 +19,7 @@ export const articleSlice = createSlice({
     fetchOffset: 0,
     pageSize: 5,
     articleFormMode: null,
-    isEdit: false,
+    isEdit: true,
     status: null,
     error: null,
     articleErrorMessage: '',
@@ -81,6 +81,9 @@ export const articleSlice = createSlice({
         state.status = 'resolved';
         state.article = action.payload.article;
         state.isEdit = false;
+        state.articles = state.articles.map((article) =>
+          article.slug === action.payload.article.slug ? action.payload.article : article
+        );
       })
       .addCase(updateArticle.rejected, (state, action) => {
         state.status = 'error';
