@@ -13,7 +13,7 @@ const ArticleList = () => {
 
   useEffect(() => {
     dispatch(fetchArticles(currentPage));
-  }, []);
+  }, [dispatch]);
 
   const articlesData = articles.map((article) => {
     const id = generateKey(article.slug);

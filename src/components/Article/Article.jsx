@@ -42,7 +42,7 @@ const Article = () => {
 
   const handleEdit = () => {
     dispatch(fetchArticle(slugValue));
-    setIsEdit(true);
+    dispatch(setIsEdit(true));
     navigate(`/articles/${slugValue}/edit`);
     console.log(`to edit. isEdit: ${isEdit}`);
   };

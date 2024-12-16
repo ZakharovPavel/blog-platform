@@ -80,6 +80,7 @@ export const articleSlice = createSlice({
       .addCase(updateArticle.fulfilled, (state, action) => {
         state.status = 'resolved';
         state.article = action.payload.article;
+        state.isEdit = false;
       })
       .addCase(updateArticle.rejected, (state, action) => {
         state.status = 'error';

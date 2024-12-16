@@ -18,19 +18,25 @@ const ArticleForm = () => {
   const location = useLocation();
   const { slugValue } = useParams();
 
+  let editableTags;
+
+  if (currentUser?.username === article?.author?.username && isEdit) {
+    editableTags = article?.tagList?.map((tag) => {
+      return { name: tag };
+    });
+  }
+
   const {
     register,
     formState: { errors, isValid },
     handleSubmit,
+    reset,
     control,
   } = useForm({
     resolver: yupResolver(schema),
     mode: 'onBlur',
     defaultValues: {
-      tagList:
-        isEdit && currentUser?.username === article?.author.username
-          ? article?.tagList.map((tag) => ({ name: tag }))
-          : [{ name: '' }],
+      tagList: currentUser?.username === article?.author?.username && isEdit ? editableTags : [{ name: '' }],
     },
   });
 
@@ -38,6 +44,12 @@ const ArticleForm = () => {
     name: 'tagList',
     control,
   });
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate('/sign-in');
+    }
+  }, [isLoggedIn, navigate]);
 
   //
   useEffect(() => {
@@ -47,19 +59,22 @@ const ArticleForm = () => {
   }, [dispatch, slugValue]);
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      navigate('/sign-in');
+    if (!isEdit) {
+      reset();
     }
-    if (isEdit && currentUser?.username !== article?.author?.username) {
-      navigate('/articles');
-    }
-  }, [isLoggedIn, navigate, isEdit]);
+  }, [isEdit]);
 
   useEffect(() => {
     if (location.pathname === `/articles/${slugValue}/edit` && currentUser?.username === article?.author?.username) {
       dispatch(setIsEdit(true));
     }
   }, [dispatch, location.pathname, slugValue, isEdit]);
+
+  useEffect(() => {
+    if (isEdit && currentUser?.username !== article?.author?.username) {
+      navigate('/articles');
+    }
+  }, [isEdit]);
 
   const onSubmit = (data) => {
     const newData = {
@@ -93,47 +108,89 @@ const ArticleForm = () => {
 
       <label className={styles['sign-form__label']}>
         <span className={styles['sign-form__label-text']}>Title</span>
-        <input
-          {...register('title')}
-          type="text"
-          className={
-            errors?.title
-              ? styles['sign-form__label-input--error']
-              : [styles['sign-form__label-input'], styles['sign-form__label-input--article-form']].join(' ')
-          }
-          placeholder="Title"
-          defaultValue={isEdit ? article?.title : null}
-        />
+        {currentUser?.username === article?.author?.username && isEdit ? (
+          <input
+            {...register('title')}
+            type="text"
+            className={
+              errors?.title
+                ? styles['sign-form__label-input--error']
+                : [styles['sign-form__label-input'], styles['sign-form__label-input--article-form']].join(' ')
+            }
+            placeholder="Title"
+            defaultValue={article?.title}
+          />
+        ) : (
+          <input
+            {...register('title')}
+            type="text"
+            className={
+              errors?.title
+                ? styles['sign-form__label-input--error']
+                : [styles['sign-form__label-input'], styles['sign-form__label-input--article-form']].join(' ')
+            }
+            placeholder="Title"
+            defaultValue={''}
+          />
+        )}
         <span className={styles['sign-form__validation-error-text']}>{errors?.title?.message}</span>
       </label>
       <label className={styles['sign-form__label']}>
         <span className={styles['sign-form__label-text']}>Short description</span>
-        <input
-          {...register('description')}
-          type="text"
-          className={
-            errors?.description
-              ? styles['sign-form__label-input--error']
-              : [styles['sign-form__label-input'], styles['sign-form__label-input--article-form']].join(' ')
-          }
-          placeholder="Description"
-          defaultValue={isEdit ? article?.description : null}
-        />
+        {currentUser?.username === article?.author?.username && isEdit ? (
+          <input
+            {...register('description')}
+            type="text"
+            className={
+              errors?.description
+                ? styles['sign-form__label-input--error']
+                : [styles['sign-form__label-input'], styles['sign-form__label-input--article-form']].join(' ')
+            }
+            placeholder="Description"
+            defaultValue={article?.description}
+          />
+        ) : (
+          <input
+            {...register('description')}
+            type="text"
+            className={
+              errors?.description
+                ? styles['sign-form__label-input--error']
+                : [styles['sign-form__label-input'], styles['sign-form__label-input--article-form']].join(' ')
+            }
+            placeholder="Description"
+            defaultValue={''}
+          />
+        )}
         <span className={styles['sign-form__validation-error-text']}>{errors?.description?.message}</span>
       </label>
       <label className={styles['sign-form__label']}>
         <span className={styles['sign-form__label-text']}>Text</span>
-        <textarea
-          {...register('body')}
-          type="text"
-          className={
-            errors?.body
-              ? styles['sign-form__label-input--error-textarea']
-              : [styles['sign-form__label-input'], styles['sign-form__label-input--article-form-text']].join(' ')
-          }
-          defaultValue={isEdit ? article?.body : null}
-          placeholder="Text"
-        />
+        {currentUser?.username === article?.author?.username && isEdit ? (
+          <textarea
+            {...register('body')}
+            type="text"
+            className={
+              errors?.body
+                ? styles['sign-form__label-input--error-textarea']
+                : [styles['sign-form__label-input'], styles['sign-form__label-input--article-form-text']].join(' ')
+            }
+            placeholder="Text"
+            defaultValue={article?.body}
+          />
+        ) : (
+          <textarea
+            {...register('body')}
+            type="text"
+            className={
+              errors?.body
+                ? styles['sign-form__label-input--error-textarea']
+                : [styles['sign-form__label-input'], styles['sign-form__label-input--article-form-text']].join(' ')
+            }
+            placeholder="Text"
+            defaultValue={''}
+          />
+        )}
         <span className={styles['sign-form__validation-error-text']}>{errors?.body?.message}</span>
       </label>
       <label className={styles['sign-form__label']}>
@@ -177,7 +234,6 @@ const ArticleForm = () => {
             );
           })}
         </ul>
-
         <span className={styles['sign-form__validation-error-text']}>{errors?.tagList?.message}</span>
       </label>
       {accountErrorMessage === 'createAccount error' ? (
