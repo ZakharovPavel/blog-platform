@@ -10,8 +10,9 @@ export const accountSlice = createSlice({
     isLoggedIn: localStorage.getItem('token'),
     status: null,
     error: null,
-    accountErrorMessage: '',
+    accountErrorMessage: null,
     createError: false,
+    isAccountCreated: false,
   },
   reducers: {
     setCurrentUser: (state) => {
@@ -25,6 +26,9 @@ export const accountSlice = createSlice({
       state.currentUser = null;
       localStorage.clear();
     },
+    setIsAccountCreated: (state, action) => {
+      state.isAccountCreated = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -34,11 +38,13 @@ export const accountSlice = createSlice({
       })
       .addCase(createAccount.fulfilled, (state) => {
         state.status = 'resolved';
+        state.isAccountCreated = true;
       })
       .addCase(createAccount.rejected, (state) => {
         state.status = 'error';
         state.accountErrorMessage = 'createAccount error';
       })
+
       .addCase(loginAccount.pending, (state) => {
         state.status = 'loading';
         state.accountErrorMessage = '';
@@ -87,6 +93,6 @@ export const accountSlice = createSlice({
   },
 });
 
-export const { setCurrentUser, setUserToken, handleLogOut } = accountSlice.actions;
+export const { setCurrentUser, setUserToken, handleLogOut, setIsAccountCreated } = accountSlice.actions;
 
 export default accountSlice.reducer;

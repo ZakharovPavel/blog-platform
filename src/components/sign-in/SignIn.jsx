@@ -5,11 +5,12 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAccount } from '../../utils/AccountService';
+import { useEffect } from 'react';
 
 const SignIn = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { accountErrorMessage } = useSelector((state) => state.account);
+  const { isLoggedIn, accountErrorMessage } = useSelector((state) => state.account);
 
   const {
     register,
@@ -23,9 +24,14 @@ const SignIn = () => {
 
   const onSubmit = (data) => {
     dispatch(loginAccount(data));
-    navigate('/');
     reset();
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/');
+    }
+  });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles['sign-form']}>
@@ -35,7 +41,11 @@ const SignIn = () => {
         <input
           {...register('email')}
           type="email"
-          className={errors?.email ? styles['sign-form__label-input--error'] : styles['sign-form__label-input']}
+          className={
+            errors?.email || accountErrorMessage === 'loginAccount error'
+              ? styles['sign-form__label-input--error']
+              : styles['sign-form__label-input']
+          }
           placeholder="Email address"
         />
         <span className={styles['sign-form__validation-error-text']}>{errors?.email?.message}</span>
@@ -45,7 +55,11 @@ const SignIn = () => {
         <input
           {...register('password')}
           type="password"
-          className={errors?.password ? styles['sign-form__label-input--error'] : styles['sign-form__label-input']}
+          className={
+            errors?.password || accountErrorMessage === 'loginAccount error'
+              ? styles['sign-form__label-input--error']
+              : styles['sign-form__label-input']
+          }
           placeholder="Password"
         />
         <span className={styles['sign-form__validation-error-text']}>{errors?.password?.message}</span>

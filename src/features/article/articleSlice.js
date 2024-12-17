@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
   createArticle,
+  deleteArticle,
   favoriteArticle,
   fetchArticle,
   fetchArticles,
@@ -19,7 +20,7 @@ export const articleSlice = createSlice({
     fetchOffset: 0,
     pageSize: 5,
     articleFormMode: null,
-    isEdit: true,
+    isEdit: false,
     status: null,
     error: null,
     articleErrorMessage: '',
@@ -68,6 +69,10 @@ export const articleSlice = createSlice({
       .addCase(createArticle.fulfilled, (state, action) => {
         state.status = 'resolved';
         state.article = action.payload.article;
+        state.articles.unshift(action.payload.article);
+        if (state.articles.length > 1) {
+          state.articles.pop();
+        }
       })
       .addCase(createArticle.rejected, (state, action) => {
         state.status = 'error';
@@ -86,6 +91,13 @@ export const articleSlice = createSlice({
         );
       })
       .addCase(updateArticle.rejected, (state, action) => {
+        state.status = 'error';
+        state.articleErrorMessage = action.payload;
+      })
+
+      .addCase(deleteArticle.pending, () => {})
+      .addCase(deleteArticle.fulfilled, () => {})
+      .addCase(deleteArticle.rejected, (state, action) => {
         state.status = 'error';
         state.articleErrorMessage = action.payload;
       })

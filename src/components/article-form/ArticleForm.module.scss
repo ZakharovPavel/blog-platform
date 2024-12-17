@@ -28,8 +28,6 @@
   }
 
   &__title {
-    //styleName: Semibold / 20 px | 28 px;
-    // font-family: Roboto;
     font-size: 20px;
     font-weight: 600;
     line-height: 28px;
@@ -45,8 +43,6 @@
   }
 
   .sign-form__label-text {
-    //styleName: Regular / 14px | 22px;
-    // font-family: Roboto;
     font-size: 14px;
     font-weight: 400px;
     line-height: 22px;
@@ -75,18 +71,6 @@
     border: 1px solid #d9d9d9;
     border-radius: 4px;
   }
-
-  // .sign-form__label-input--error {
-  //   height: 40px;
-  //   width: 320px;
-  //   padding: 8px 12px;
-  //   border: 1px solid #f7b5b5;
-  //   border-radius: 4px;
-  // }
-
-  // input:focus {
-  //   border: 2px solid #D9D9D9;
-  // }
 
   .sign-form__label-input--error {
     height: 40px;
@@ -129,8 +113,6 @@
   }
 
   input::placeholder {
-    //styleName: Regular / 16 px | 24 px;
-    // font-family: Roboto;
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
@@ -141,8 +123,6 @@
   }
 
   textarea::placeholder {
-    //styleName: Regular / 16 px | 24 px;
-    // font-family: Roboto;
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
@@ -151,10 +131,6 @@
     text-decoration-skip-ink: none;
     color: #bfbfbf;
   }
-
-  // .sign-form__label-input:focus {
-  //   border: 3px solid red;
-  // }
 
   .article-form__tags-list {
     display: flex;
@@ -165,16 +141,11 @@
   .article-form__tag {
     display: flex;
     gap: 17px;
-    // text-align: center;
     align-items: center;
   }
 
   .article-form__delete-tag-button {
-    // box-sizing: border-box;
     padding: 8px 36px;
-    // display: flex;
-    //styleName: Regular / 16 px | 24 px;
-    // font-family: Roboto;
     font-size: 16px;
     font-weight: 500;
     line-height: 24px;
@@ -189,9 +160,6 @@
 
   .article-form__add-tag-button {
     padding: 8px 40px;
-    // display: flex;
-    //styleName: Regular / 16 px | 24 px;
-    // font-family: Roboto;
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
@@ -209,8 +177,6 @@
     min-height: 40px;
     height: 40px;
     margin-top: 11px;
-    //styleName: Regular / 16 px | 24 px;
-    // font-family: Roboto;
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
@@ -230,7 +196,6 @@
   }
 
   .sign-form__validation-error-container {
-    // height: 22px;
   }
 
   .sign-form__validation-error-text {

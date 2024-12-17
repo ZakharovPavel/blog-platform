@@ -18,13 +18,24 @@ const ArticleForm = () => {
   const location = useLocation();
   const { slugValue } = useParams();
 
-  // let editableTags;
+  let editableTags;
 
-  // if (currentUser?.username === article?.author?.username && isEdit) {
-  //   editableTags = article?.tagList?.map((tag) => {
-  //     return { name: tag };
-  //   });
-  // }
+  if (currentUser?.username === article?.author?.username && isEdit) {
+    editableTags = article?.tagList?.map((tag) => {
+      return { name: tag };
+    });
+  }
+
+  const handleTagList = () => {
+    if (!isEdit) {
+      return [{ name: '' }];
+    }
+    if (currentUser?.username === article?.author?.username && isEdit) {
+      return editableTags;
+    } else {
+      return [{ name: '' }];
+    }
+  };
 
   const {
     register,
@@ -36,8 +47,7 @@ const ArticleForm = () => {
     resolver: yupResolver(schema),
     mode: 'onBlur',
     defaultValues: {
-      // tagList: currentUser?.username === article?.author?.username && isEdit ? editableTags : [{ name: '' }],
-      tagList: [{ name: '' }],
+      tagList: handleTagList(),
     },
   });
 
@@ -60,12 +70,6 @@ const ArticleForm = () => {
   }, [dispatch, slugValue]);
 
   useEffect(() => {
-    if (!isEdit) {
-      reset();
-    }
-  }, [isEdit]);
-
-  useEffect(() => {
     if (location.pathname === `/articles/${slugValue}/edit` && currentUser?.username === article?.author?.username) {
       dispatch(setIsEdit(true));
     }
@@ -79,6 +83,13 @@ const ArticleForm = () => {
       navigate('/articles');
     }
   }, [isEdit]);
+
+  useEffect(() => {
+    if (!isEdit) {
+      reset();
+      reset({ tagList: [{ name: '' }] });
+    }
+  }, [location.pathname, reset, isEdit]);
 
   const onSubmit = (data) => {
     const newData = {

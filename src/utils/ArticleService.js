@@ -147,7 +147,7 @@ const deleteArticleForThunk = async (data, { rejectWithValue }) => {
   }
 };
 
-const deleteArticle = createAsyncThunk('article/updateArticle', async (data, { rejectWithValue }) => {
+const deleteArticle = createAsyncThunk('article/deleteArticle', async (data, { rejectWithValue }) => {
   return deleteArticleForThunk(data, { rejectWithValue });
 });
 
@@ -222,6 +222,21 @@ function generateKey(prefix) {
   return `${prefix}_${Math.floor(100000 + Math.random() * 900000)}`;
 }
 
+const truncateText = (text, maxLength) => {
+  if (text.length <= maxLength) {
+    return text;
+  }
+
+  let truncatedText = text.slice(0, maxLength);
+  const lastSpaceIndex = truncatedText.lastIndexOf(' ');
+
+  if (lastSpaceIndex > -1) {
+    truncatedText = truncatedText.slice(0, lastSpaceIndex);
+  }
+
+  return `${truncatedText}...`;
+};
+
 export {
   fetchArticles,
   fetchArticle,
@@ -232,4 +247,5 @@ export {
   unfavoriteArticle,
   transformArticle,
   generateKey,
+  truncateText,
 };

@@ -1,21 +1,21 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from './SignUp.module.scss';
 import { useForm } from 'react-hook-form';
 import { schema } from './schema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { createAccount } from '../../utils/AccountService';
+import { useEffect } from 'react';
+import { setIsAccountCreated } from '../../features/account/accountSlice';
 
 const SignUp = () => {
   const dispatch = useDispatch();
-  const { accountErrorMessage } = useSelector((state) => state.account);
-  const navigate = useNavigate();
+  const { accountErrorMessage, isAccountCreated } = useSelector((state) => state.account);
 
   const {
     register,
     formState: { errors, isValid },
     handleSubmit,
-    reset,
   } = useForm({
     resolver: yupResolver(schema),
     mode: 'onBlur',
@@ -23,9 +23,13 @@ const SignUp = () => {
 
   const onSubmit = (data) => {
     dispatch(createAccount(data));
-    reset();
-    navigate('/');
   };
+
+  useEffect(() => {
+    dispatch(setIsAccountCreated(false));
+
+    return () => dispatch(setIsAccountCreated(false));
+  }, []);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles['sign-form']}>
@@ -35,7 +39,11 @@ const SignUp = () => {
         <input
           {...register('username')}
           type="text"
-          className={errors?.username ? styles['sign-form__label-input--error'] : styles['sign-form__label-input']}
+          className={
+            errors?.username || accountErrorMessage === 'createAccount error'
+              ? styles['sign-form__label-input--error']
+              : styles['sign-form__label-input']
+          }
           placeholder="Username"
         />
         <span className={styles['sign-form__validation-error-text']}>{errors?.username?.message}</span>
@@ -45,7 +53,11 @@ const SignUp = () => {
         <input
           {...register('email')}
           type="email"
-          className={errors?.email ? styles['sign-form__label-input--error'] : styles['sign-form__label-input']}
+          className={
+            errors?.email || accountErrorMessage === 'createAccount error'
+              ? styles['sign-form__label-input--error']
+              : styles['sign-form__label-input']
+          }
           placeholder="Email address"
         />
         <span className={styles['sign-form__validation-error-text']}>{errors?.email?.message}</span>
@@ -81,6 +93,9 @@ const SignUp = () => {
         <span className={styles['sign-form__validation-error-text']}>
           Username or email is already taken. Try others
         </span>
+      ) : null}
+      {isAccountCreated ? (
+        <span className={styles['sign-form__successfull-text']}>Account was successfully created</span>
       ) : null}
       <button type="submit" className={styles['sign-form__button']} disabled={!isValid}>
         Create

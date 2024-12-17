@@ -70,18 +70,18 @@ const Article = () => {
           <div className={styles['article-header__title-container']}>
             <span className={styles['article-header__title']}>{article.title}</span>
             <div className={styles['like-container']}>
-              <input
-                className={styles['custom-checkbox']}
-                id={`${article.slug}`}
-                type="checkbox"
-                name="favorite"
-                checked={article.favorited}
-                onChange={article.favorited ? handleUnfavorite : handleFavorite}
+              <button
+                type="button"
+                onClick={article.favorited ? handleUnfavorite : handleFavorite}
+                className={
+                  article.favorited && isLoggedIn
+                    ? styles['article-header__like-button-favorite']
+                    : styles['article-header__like-button-unfavorite']
+                }
                 disabled={!isLoggedIn}
-              />
-              <label htmlFor={`${article.slug}`} className={styles['like-counter']}>
+              >
                 {article.favoritesCount}
-              </label>
+              </button>
             </div>
           </div>
           <div className={styles['article-header__tags-container']}>

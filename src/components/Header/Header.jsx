@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import styles from './Header.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { Avatar } from 'antd';
@@ -6,7 +6,6 @@ import { handleLogOut, setCurrentUser, setUserToken } from '../../features/accou
 import { useEffect } from 'react';
 import { getUser } from '../../utils/AccountService';
 import { setIsEdit } from '../../features/article/articleSlice';
-// import { UserOutlined } from '@ant-design/icons';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -24,7 +23,6 @@ const Header = () => {
 
   const handleCreateArticle = () => {
     dispatch(setIsEdit(false));
-    navigate('new-article');
   };
 
   const onToggleLogOut = () => {
@@ -34,16 +32,14 @@ const Header = () => {
 
   const rightSide = isLoggedIn ? (
     <div className={styles['header__right-side']}>
-      <button
+      <Link
         className={[styles['sign-button'], styles['sign-button--create-article']].join(' ')}
+        to="/new-article"
         onClick={handleCreateArticle}
       >
         Create article
-      </button>
-      <button
-        className={[styles['sign-button'], styles['header__profile-preview-button']].join(' ')}
-        onClick={() => navigate('profile')}
-      >
+      </Link>
+      <Link className={[styles['sign-button'], styles['header__profile-preview-button']].join(' ')} to="/profile">
         <span className={styles['header__profile-name']}>{currentUser?.username}</span>
         <Avatar
           size={46}
@@ -53,7 +49,7 @@ const Header = () => {
               : `https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541`
           }
         />
-      </button>
+      </Link>
       <button
         className={[styles['sign-button'], styles['sign-button--log-out']].join(' ')}
         onClick={() => onToggleLogOut()}

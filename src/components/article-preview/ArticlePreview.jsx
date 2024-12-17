@@ -4,7 +4,7 @@ import styles from './ArticlePreview.module.scss';
 import { Link } from 'react-router-dom';
 import { Avatar, Tag, Typography } from 'antd';
 import { format } from 'date-fns';
-import { favoriteArticle, unfavoriteArticle } from '../../utils/ArticleService';
+import { favoriteArticle, truncateText, unfavoriteArticle } from '../../utils/ArticleService';
 
 const ArticlePreview = ({ newArticle }) => {
   const dispatch = useDispatch();
@@ -27,22 +27,20 @@ const ArticlePreview = ({ newArticle }) => {
         <div className={styles['article-header__left-side']}>
           <div className={styles['article-header__title-container']}>
             <Link className={styles['article-header__title']} to={`/articles/${newArticle.slug}`}>
-              {newArticle.title}
+              {truncateText(newArticle.title, 50)}
             </Link>
-            <div className={styles['like-container']}>
-              <input
-                className={styles['custom-checkbox']}
-                id={`${newArticle.slug}`}
-                type="checkbox"
-                name="favorite"
-                checked={newArticle.favorited}
-                onChange={newArticle.favorited ? handleUnfavorite : handleFavorite}
-                disabled={!isLoggedIn}
-              />
-              <label htmlFor={`${newArticle.slug}`} className={styles['like-counter']}>
-                {newArticle.favoritesCount}
-              </label>
-            </div>
+            <button
+              type="button"
+              onClick={newArticle.favorited ? handleUnfavorite : handleFavorite}
+              className={
+                newArticle.favorited && isLoggedIn
+                  ? styles['article-header__like-button-favorite']
+                  : styles['article-header__like-button-unfavorite']
+              }
+              disabled={!isLoggedIn}
+            >
+              {newArticle.favoritesCount}
+            </button>
           </div>
           {newArticle.tagList &&
             newArticle.tagList.map((tag, index) => {
@@ -60,7 +58,7 @@ const ArticlePreview = ({ newArticle }) => {
           <Avatar size={46} src={`${newArticle.author.image}`} />
         </div>
       </div>
-      <div className={styles['article-description']}>{newArticle.description}</div>
+      <div className={styles['article-description']}>{truncateText(newArticle.description, 195)}</div>
     </li>
   );
 };

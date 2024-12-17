@@ -188,6 +188,16 @@
   }
 }
 
+.sign-form__successfull-text {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #13b62b;
+}
+
 // customize checkbox
 
 /* для элемента input c type="checkbox" */
