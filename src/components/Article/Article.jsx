@@ -1,9 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import styles from './Article.module.scss';
 import { Avatar, Popconfirm, Spin, Tag, Typography } from 'antd';
 import { format } from 'date-fns';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { deleteArticle, favoriteArticle, fetchArticle, unfavoriteArticle } from '../../utils/ArticleService';
+import {
+  deleteArticle,
+  favoriteArticle,
+  fetchArticle,
+  fetchArticles,
+  unfavoriteArticle,
+} from '../../utils/ArticleService';
 import Markdown from 'markdown-to-jsx';
 import { useEffect } from 'react';
 import { setIsEdit } from '../../features/article/articleSlice';
@@ -13,13 +20,24 @@ const Article = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { slugValue } = useParams();
+  const { slug } = useParams();
   const { isLoggedIn, currentUser, token } = useSelector((state) => state.account);
-  const { article, status } = useSelector((state) => state.article);
+  const { article, status, currentPage } = useSelector((state) => state.article);
+
+  let slugValue = slug || article.slug;
+
+  // useEffect(() => {
+  //   dispatch(fetchArticle(slug));
+  // }, [dispatch, slug]);
+
+  // useEffect(() => {
+  //   dispatch(fetchArticle(slug));
+  // }, []);
 
   useEffect(() => {
     dispatch(fetchArticle(slugValue));
-  }, [dispatch, slugValue]);
+    dispatch(fetchArticles(currentPage));
+  }, [dispatch]);
 
   if (status === 'error') {
     return <h2>Page not found</h2>;
@@ -31,7 +49,7 @@ const Article = () => {
 
   const handleDelete = () => {
     const data = {
-      slugValue,
+      slug,
       token,
     };
 
@@ -40,14 +58,14 @@ const Article = () => {
   };
 
   const handleEdit = () => {
-    dispatch(fetchArticle(slugValue));
+    dispatch(fetchArticle(slug));
     dispatch(setIsEdit(true));
-    navigate(`/articles/${slugValue}/edit`);
+    navigate(`/articles/${slug}/edit`);
   };
 
   const handleFavorite = () => {
     const data = {
-      slug: slugValue,
+      slug,
       token,
     };
 
@@ -56,7 +74,7 @@ const Article = () => {
 
   const handleUnfavorite = () => {
     const data = {
-      slug: slugValue,
+      slug,
       token,
     };
 

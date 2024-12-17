@@ -89,7 +89,7 @@ const createArticle = createAsyncThunk('article/createArticle', async (data, { r
 
 const updateArticleForThunk = async (data, { rejectWithValue }) => {
   try {
-    const { title, description, body, tagList, token, slugValue } = data;
+    const { title, description, body, tagList, token, slug } = data;
     const article = {
       article: {
         title,
@@ -99,7 +99,7 @@ const updateArticleForThunk = async (data, { rejectWithValue }) => {
         token,
       },
     };
-    const response = await fetch(`${apiBase}/articles/${slugValue}`, {
+    const response = await fetch(`${apiBase}/articles/${slug}`, {
       method: 'PUT',
       headers: {
         Authorization: `Token ${data.token}`,
@@ -126,8 +126,8 @@ const updateArticle = createAsyncThunk('article/updateArticle', async (data, { r
 
 const deleteArticleForThunk = async (data, { rejectWithValue }) => {
   try {
-    const { token, slugValue } = data;
-    const response = await fetch(`${apiBase}/articles/${slugValue}`, {
+    const { token, slug } = data;
+    const response = await fetch(`${apiBase}/articles/${slug}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Token ${token}`,

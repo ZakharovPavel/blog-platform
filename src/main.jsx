@@ -5,7 +5,8 @@ import './index.scss';
 import App from './app/App.jsx';
 import { Provider } from 'react-redux';
 import { store } from './app/store.js';
-import { BrowserRouter as Router } from 'react-router-dom';
+// import { BrowserRouter as Router } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 
 createRoot(document.getElementById('root')).render(
   <Router>

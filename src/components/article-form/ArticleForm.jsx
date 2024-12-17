@@ -16,7 +16,7 @@ const ArticleForm = () => {
   const { article, isEdit } = useSelector((state) => state.article);
   const navigate = useNavigate();
   const location = useLocation();
-  const { slugValue } = useParams();
+  const { slug } = useParams();
 
   let editableTags;
 
@@ -64,19 +64,19 @@ const ArticleForm = () => {
 
   //
   useEffect(() => {
-    if (slugValue) {
-      dispatch(fetchArticle(slugValue));
+    if (slug) {
+      dispatch(fetchArticle(slug));
     }
-  }, [dispatch, slugValue]);
+  }, [dispatch, slug]);
 
   useEffect(() => {
-    if (location.pathname === `/articles/${slugValue}/edit` && currentUser?.username === article?.author?.username) {
+    if (location.pathname === `/articles/${slug}/edit` && currentUser?.username === article?.author?.username) {
       dispatch(setIsEdit(true));
     }
     if (location.pathname === `/new-article` && currentUser?.username === article?.author?.username) {
       dispatch(setIsEdit(false));
     }
-  }, [dispatch, location.pathname, slugValue, isEdit]);
+  }, [dispatch, location.pathname, slug, isEdit]);
 
   useEffect(() => {
     if (isEdit && currentUser?.username !== article?.author?.username) {
@@ -96,7 +96,7 @@ const ArticleForm = () => {
       ...data,
       tagList: data.tagList.map((tag) => tag.name),
       token,
-      slugValue,
+      slug,
     };
 
     if (!isEdit) {

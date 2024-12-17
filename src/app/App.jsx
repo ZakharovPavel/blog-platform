@@ -17,13 +17,13 @@ function App() {
       <main className={styles['main']}>
         <Routes>
           <Route path="/" element={<ArticleList />} />
-          <Route path="articles" element={<ArticleList />} />
-          <Route path="articles/:slugValue" element={<Article />} />
-          <Route path="new-article" element={<ArticleForm />} />
-          <Route path="articles/:slugValue/edit" element={<ArticleForm />} />
-          <Route path="sign-in" element={<SignIn />} />
-          <Route path="sign-up" element={<SignUp />} />
-          <Route path="profile" element={<EditProfile />} />
+          <Route path="/articles" element={<ArticleList />} />
+          <Route path="/articles/:slug" element={<Article />} />
+          <Route path="/new-article" element={<ArticleForm />} />
+          <Route path="/articles/:slug/edit" element={<ArticleForm />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/profile" element={<EditProfile />} />
           <Route path="*" element={<NoMatch />} />
         </Routes>
       </main>
